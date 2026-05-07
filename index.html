@@ -1,78 +1,893 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-
-<title>Admin Dashboard</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VEYRO</title>
 
 <style>
 
-body{
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
 font-family:Arial;
-padding:20px;
-background:#f5f5f5;
+}
+
+body{
+background:#EEF4FF;
+overflow-x:hidden;
+color:#0F172A;
+}
+
+/* SPLASH */
+
+#splash{
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+background:linear-gradient(135deg,#0F172A,#2563EB);
+color:white;
+}
+
+#splash h1{
+font-size:60px;
+letter-spacing:3px;
+}
+
+#splash p{
+margin-top:10px;
+font-size:18px;
+}
+
+/* LOGIN */
+
+.loginBox{
+width:90%;
+max-width:420px;
+background:white;
+padding:35px;
+border-radius:25px;
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+box-shadow:0 10px 30px rgba(0,0,0,0.1);
+}
+
+.loginBox h2{
+text-align:center;
+margin-bottom:25px;
+}
+
+.loginBox input{
+width:100%;
+padding:16px;
+border-radius:14px;
+border:1px solid #ccc;
+margin-bottom:16px;
+font-size:16px;
+}
+
+.loginBox button{
+width:100%;
+padding:16px;
+background:#2563EB;
+border:none;
+border-radius:14px;
+color:white;
+font-size:16px;
+cursor:pointer;
+}
+
+/* TOPBAR */
+
+.topbar{
+background:#0F172A;
+padding:18px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+color:white;
+position:sticky;
+top:0;
+z-index:99;
 }
 
 .logo{
-font-size:32px;
+font-size:28px;
 font-weight:bold;
-color:orange;
+}
+
+.menu{
+font-size:32px;
+cursor:pointer;
+}
+
+/* WELCOME */
+
+.welcome{
+padding:20px;
+}
+
+.welcome h2{
+font-size:28px;
+}
+
+.welcome p{
+color:#2563EB;
+margin-top:5px;
+}
+
+/* OFFERS */
+
+.offerBox{
+margin:0 20px 20px;
+padding:20px;
+background:linear-gradient(to right,#2563EB,#3B82F6);
+border-radius:24px;
+color:white;
+}
+
+.offerBox h3{
+font-size:24px;
+}
+
+.offerBox p{
+margin-top:8px;
+}
+
+/* SEARCH */
+
+.search{
+padding:0 20px 20px;
+}
+
+.search input{
+width:100%;
+padding:16px;
+border:none;
+border-radius:14px;
+box-shadow:0 5px 15px rgba(0,0,0,0.08);
+}
+
+/* SERVICES */
+
+.services{
+padding:0 20px 100px;
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:16px;
 }
 
 .card{
 background:white;
-padding:20px;
-margin-top:20px;
-border-radius:12px;
+border-radius:24px;
+overflow:hidden;
+box-shadow:0 5px 20px rgba(0,0,0,0.08);
+transition:0.3s;
 }
 
-button{
-background:orange;
-color:white;
-padding:12px;
+.card:hover{
+transform:translateY(-5px);
+}
+
+.cardTop{
+height:90px;
+background:linear-gradient(to right,#0F172A,#2563EB);
+}
+
+.card h3{
+padding:18px 18px 8px;
+}
+
+.card p{
+padding:0 18px;
+color:gray;
+font-size:14px;
+}
+
+.card button{
+margin:18px;
+width:calc(100% - 36px);
+padding:14px;
+background:#2563EB;
 border:none;
-border-radius:10px;
-width:100%;
-font-size:18px;
+border-radius:12px;
+color:white;
+cursor:pointer;
 }
 
-input{
-width:100%;
-padding:12px;
-margin-top:10px;
+/* SERVICE PAGE */
+
+.servicePage{
+padding:20px;
+padding-bottom:100px;
+}
+
+.backBtn{
+padding:12px 18px;
+background:#2563EB;
+border:none;
+border-radius:12px;
+color:white;
+margin-bottom:20px;
+cursor:pointer;
+}
+
+.serviceCard{
+background:white;
+padding:25px;
+border-radius:24px;
+box-shadow:0 5px 20px rgba(0,0,0,0.08);
+}
+
+.serviceCard h2{
 margin-bottom:10px;
 }
 
-</style>
+.serviceCard p{
+color:#2563EB;
+margin-bottom:20px;
+}
 
+.serviceCard input,
+.serviceCard textarea,
+.serviceCard select{
+width:100%;
+padding:16px;
+border-radius:14px;
+border:1px solid #ccc;
+margin-bottom:16px;
+}
+
+.serviceCard button{
+width:100%;
+padding:16px;
+background:#2563EB;
+border:none;
+border-radius:14px;
+color:white;
+font-size:16px;
+cursor:pointer;
+}
+
+/* LOADER */
+
+.loaderPage{
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+}
+
+.loader{
+width:70px;
+height:70px;
+border:7px solid #ddd;
+border-top:7px solid #2563EB;
+border-radius:50%;
+animation:spin 1s linear infinite;
+}
+
+@keyframes spin{
+100%{
+transform:rotate(360deg);
+}
+}
+
+.loaderPage h2{
+margin-top:20px;
+}
+
+/* BOOKING */
+
+.bookingPage{
+padding:20px 20px 100px;
+}
+
+.bookingCard{
+background:white;
+padding:25px;
+border-radius:24px;
+box-shadow:0 5px 20px rgba(0,0,0,0.08);
+}
+
+.worker{
+display:flex;
+align-items:center;
+gap:15px;
+margin-bottom:25px;
+}
+
+.workerImg{
+width:80px;
+height:80px;
+border-radius:50%;
+background:#CBD5E1;
+}
+
+.worker h3{
+margin-bottom:5px;
+}
+
+.statusStep{
+padding:14px;
+background:#DBEAFE;
+border-radius:12px;
+margin-bottom:12px;
+font-weight:bold;
+}
+
+.arrive{
+margin-top:20px;
+color:#2563EB;
+font-weight:bold;
+}
+
+.otpBox{
+margin-top:25px;
+padding:20px;
+background:#EFF6FF;
+border-radius:20px;
+text-align:center;
+}
+
+.otpBox h1{
+font-size:42px;
+letter-spacing:8px;
+margin-top:10px;
+color:#2563EB;
+}
+
+.callBtn{
+width:100%;
+padding:15px;
+margin-top:18px;
+background:#22C55E;
+border:none;
+border-radius:12px;
+color:white;
+font-size:16px;
+cursor:pointer;
+}
+
+.cancelBtn{
+width:100%;
+padding:15px;
+margin-top:12px;
+background:red;
+border:none;
+border-radius:12px;
+color:white;
+font-size:16px;
+cursor:pointer;
+}
+
+/* RATING */
+
+.ratingPage{
+padding:20px;
+padding-bottom:100px;
+}
+
+.ratingCard{
+background:white;
+padding:30px;
+border-radius:24px;
+box-shadow:0 5px 20px rgba(0,0,0,0.08);
+text-align:center;
+}
+
+.stars{
+font-size:42px;
+margin:20px 0;
+color:gold;
+}
+
+.ratingCard textarea{
+width:100%;
+height:120px;
+padding:16px;
+border-radius:14px;
+border:1px solid #ccc;
+}
+
+.ratingCard button{
+width:100%;
+padding:16px;
+margin-top:15px;
+background:#2563EB;
+border:none;
+border-radius:12px;
+color:white;
+font-size:16px;
+cursor:pointer;
+}
+
+/* PROFILE */
+
+#profileMenu{
+position:fixed;
+top:0;
+right:-100%;
+width:300px;
+height:100vh;
+background:white;
+padding:25px;
+transition:0.3s;
+z-index:999;
+box-shadow:-5px 0 20px rgba(0,0,0,0.1);
+overflow:auto;
+}
+
+.close{
+text-align:right;
+font-size:34px;
+cursor:pointer;
+}
+
+.profileTop{
+text-align:center;
+margin-bottom:25px;
+}
+
+.profilePhoto{
+width:90px;
+height:90px;
+border-radius:50%;
+background:#CBD5E1;
+margin:auto;
+margin-bottom:12px;
+}
+
+.menuBtn{
+width:100%;
+padding:15px;
+margin-top:12px;
+background:#2563EB;
+border:none;
+border-radius:12px;
+color:white;
+cursor:pointer;
+}
+
+/* BOTTOM NAV */
+
+.bottomNav{
+position:fixed;
+bottom:0;
+width:100%;
+background:white;
+display:flex;
+justify-content:space-around;
+padding:14px 0;
+box-shadow:0 -5px 20px rgba(0,0,0,0.08);
+}
+
+.bottomNav div{
+text-align:center;
+font-size:14px;
+}
+
+/* FOOTER */
+
+.footer{
+background:#0F172A;
+color:white;
+text-align:center;
+padding:40px 20px;
+}
+
+.footer span{
+display:block;
+margin-top:10px;
+font-size:13px;
+color:#CBD5E1;
+}
+
+/* HIDDEN */
+
+.hidden{
+display:none;
+}
+
+</style>
 </head>
 
 <body>
 
-<div class="logo">
-Admin Dashboard
+<!-- SPLASH -->
+
+<div id="splash">
+
+<h1>VEYRO</h1>
+
+<p>Professional Home Services</p>
+
 </div>
 
-<input placeholder="Admin Email">
+<!-- LOGIN -->
 
-<input placeholder="Password">
+<div id="loginPage" class="loginBox hidden">
 
-<button>
-Login
-</button>
+<h2>Welcome to VEYRO</h2>
 
-<div class="card">
+<input type="tel" id="mobile" placeholder="Enter Mobile Number" maxlength="10">
 
-<h2>New Bookings</h2>
+<button onclick="login()">Send OTP</button>
 
-<p>
-Home Cleaning Booking
+</div>
+
+<!-- HOME -->
+
+<div id="homePage" class="hidden">
+
+<div class="topbar">
+
+<div class="logo">VEYRO</div>
+
+<div class="menu" onclick="openProfile()">☰</div>
+
+</div>
+
+<div class="welcome">
+
+<h2>Welcome Back 👋</h2>
+
+<p>Book trusted home services instantly</p>
+
+</div>
+
+<div class="offerBox">
+
+<h3>20% OFF</h3>
+
+<p>For New Customers Today</p>
+
+</div>
+
+<div class="search">
+
+<input type="text" placeholder="Search Services">
+
+</div>
+
+<div class="services">
+
+<div class="card" onclick="openService('Cleaning','₹299 Starting')">
+
+<div class="cardTop"></div>
+
+<h3>Cleaning</h3>
+
+<p>Professional home cleaning service</p>
+
+<button>Book Now</button>
+
+</div>
+
+<div class="card" onclick="openService('Plumber','₹199 Starting')">
+
+<div class="cardTop"></div>
+
+<h3>Plumber</h3>
+
+<p>Quick plumbing repair service</p>
+
+<button>Book Now</button>
+
+</div>
+
+<div class="card" onclick="openService('Electrician','₹249 Starting')">
+
+<div class="cardTop"></div>
+
+<h3>Electrician</h3>
+
+<p>Electrical repair service</p>
+
+<button>Book Now</button>
+
+</div>
+
+<div class="card" onclick="openService('Painter','₹499 Starting')">
+
+<div class="cardTop"></div>
+
+<h3>Painter</h3>
+
+<p>Professional wall painting</p>
+
+<button>Book Now</button>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- SERVICE PAGE -->
+
+<div id="servicePage" class="servicePage hidden">
+
+<button class="backBtn" onclick="backHome()">← Back</button>
+
+<div class="serviceCard">
+
+<h2 id="serviceName"></h2>
+
+<p id="servicePrice"></p>
+
+<input type="text" placeholder="Enter Service Location">
+
+<textarea placeholder="Describe Your Problem"></textarea>
+
+<select>
+
+<option>Cash Payment</option>
+
+<option>UPI Payment</option>
+
+<option>Card Payment</option>
+
+</select>
+
+<button onclick="confirmBooking()">Confirm Booking</button>
+
+</div>
+
+</div>
+
+<!-- LOADER -->
+
+<div id="loaderPage" class="loaderPage hidden">
+
+<div class="loader"></div>
+
+<h2>Finding Nearby Professional...</h2>
+
+</div>
+
+<!-- BOOKING -->
+
+<div id="bookingPage" class="bookingPage hidden">
+
+<div class="bookingCard">
+
+<div class="worker">
+
+<div class="workerImg"></div>
+
+<div>
+
+<h3>Rahul Kumar</h3>
+
+<p>⭐ 4.9 • 5 Years Experience</p>
+
+<p>✔ Verified Professional</p>
+
+</div>
+
+</div>
+
+<div class="statusStep">✅ Booking Confirmed</div>
+
+<div class="statusStep">✅ Professional Assigned</div>
+
+<div class="statusStep">✅ Professional On The Way</div>
+
+<div class="statusStep">⬜ Reached Location</div>
+
+<div class="statusStep">⬜ Work Started</div>
+
+<div class="statusStep">⬜ Work Completed</div>
+
+<p class="arrive">
+Professional will reach your location in 10 mins
 </p>
 
-<button>
-Assign Worker
-</button>
+<div class="otpBox">
+
+<p>Share OTP After Worker Reaches</p>
+
+<h1>4821</h1>
 
 </div>
+
+<button class="callBtn">Call Worker</button>
+
+<button class="cancelBtn" onclick="cancelBooking()">Cancel Booking</button>
+
+<button class="callBtn" onclick="completeWork()">Admin Complete Work</button>
+
+</div>
+
+</div>
+
+<!-- RATING -->
+
+<div id="ratingPage" class="ratingPage hidden">
+
+<div class="ratingCard">
+
+<h2>Work Completed</h2>
+
+<p>Please Rate Your Experience</p>
+
+<div class="stars">★★★★★</div>
+
+<textarea placeholder="Write Feedback"></textarea>
+
+<button onclick="submitFeedback()">Submit Feedback</button>
+
+</div>
+
+</div>
+
+<!-- PROFILE -->
+
+<div id="profileMenu">
+
+<div class="close" onclick="closeProfile()">×</div>
+
+<div class="profileTop">
+
+<div class="profilePhoto"></div>
+
+<h2>Customer</h2>
+
+<p>9876543210</p>
+
+</div>
+
+<p><b>Total Bookings:</b> 5</p>
+
+<p><b>Completed:</b> 4</p>
+
+<p><b>Cancelled:</b> 1</p>
+
+<button class="menuBtn">Booking History</button>
+
+<button class="menuBtn">Saved Addresses</button>
+
+<button class="menuBtn">Offers & Coupons</button>
+
+<button class="menuBtn">Help & Support</button>
+
+<button class="menuBtn">Logout</button>
+
+</div>
+
+<!-- BOTTOM NAV -->
+
+<div class="bottomNav">
+
+<div>🏠<br>Home</div>
+
+<div>📋<br>Bookings</div>
+
+<div>💬<br>Support</div>
+
+<div>👤<br>Profile</div>
+
+</div>
+
+<!-- FOOTER -->
+
+<div class="footer">
+
+<h2>VEYRO</h2>
+
+<p>Professional Home Services</p>
+
+<span>© 2026 VEYRO. All Rights Reserved.</span>
+
+</div>
+
+<script>
+
+setTimeout(() => {
+
+document.getElementById("splash").style.display="none";
+
+document.getElementById("loginPage").classList.remove("hidden");
+
+},2000);
+
+function login(){
+
+let mobile=document.getElementById("mobile").value;
+
+if(mobile.length!=10){
+
+alert("Enter valid mobile number");
+
+return;
+}
+
+document.getElementById("loginPage").classList.add("hidden");
+
+document.getElementById("homePage").classList.remove("hidden");
+
+}
+
+function openService(name,price){
+
+document.getElementById("homePage").classList.add("hidden");
+
+document.getElementById("servicePage").classList.remove("hidden");
+
+document.getElementById("serviceName").innerText=name;
+
+document.getElementById("servicePrice").innerText=price;
+
+}
+
+function backHome(){
+
+document.getElementById("servicePage").classList.add("hidden");
+
+document.getElementById("homePage").classList.remove("hidden");
+
+}
+
+function confirmBooking(){
+
+document.getElementById("servicePage").classList.add("hidden");
+
+document.getElementById("loaderPage").classList.remove("hidden");
+
+setTimeout(()=>{
+
+document.getElementById("loaderPage").classList.add("hidden");
+
+document.getElementById("bookingPage").classList.remove("hidden");
+
+},2500);
+
+}
+
+function cancelBooking(){
+
+alert("Booking Cancelled");
+
+location.reload();
+
+}
+
+function completeWork(){
+
+document.getElementById("bookingPage").classList.add("hidden");
+
+document.getElementById("ratingPage").classList.remove("hidden");
+
+}
+
+function submitFeedback(){
+
+alert("Thank You For Your Feedback");
+
+location.reload();
+
+}
+
+function openProfile(){
+
+document.getElementById("profileMenu").style.right="0";
+
+}
+
+function closeProfile(){
+
+document.getElementById("profileMenu").style.right="-100%";
+
+}
+
+</script>
 
 </body>
 </html>
